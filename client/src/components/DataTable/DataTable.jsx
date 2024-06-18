@@ -25,7 +25,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export function DataTables({ handleEdit }) {
     const dispatch = useDispatch();
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
         dispatch(getAllDataTable());
     }, [dispatch]);
 
