@@ -1,0 +1,15 @@
+.formGroup {
+    border: 1px solid black;
+    border-radius: 10px;
+    max-height: 95vh;
+    display: flex;
+}
+
+.formGroup:hover {
+    border: 2px solid #1976d2;
+}
+
+.err {
+    color: red;
+    font-weight: bold;
+}

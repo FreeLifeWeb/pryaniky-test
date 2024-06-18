@@ -1,0 +1,9 @@
+.delete {
+    color: red;
+    cursor: pointer;
+}
+
+.editnote {
+    color: blue;
+    cursor: pointer;
+}
