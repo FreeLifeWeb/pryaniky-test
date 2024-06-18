@@ -21,6 +21,7 @@ export const setIsLoadingData = (payload) => ({
 const token = getToken();
 
 export const getAllDataTable = () => (dispatch) => {
+    console.log('getAllDataTable');
     dispatch(setIsLoadingData(true));
     axios
         .get('/ru/data/v3/testmethods/docs/userdocs/get', {

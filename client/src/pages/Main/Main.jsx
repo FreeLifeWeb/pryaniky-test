@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataTables } from '../../components/DataTable/DataTable';
 import { Button } from '@mui/material';
 import BasicModal from '../../components/Modal/Modal';
 import { FormForAddData } from '../../components/FormGroup/FormGroup';
 import style from './styles.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllDataTable } from '../../redux/actions/dataAction';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const Main = () => {
-    const [open, setOpen] = React.useState(false);
-    const [editData, setEditData] = React.useState(null);
+    const [open, setOpen] = useState(false);
+    const [editData, setEditData] = useState(null);
+    const dispatch = useDispatch();
+    const data = useSelector((store) => store.data);
+
+    useEffect(() => {
+        dispatch(getAllDataTable());
+    }, [dispatch]);
 
     const handleClose = () => {
         setOpen(false);
@@ -18,6 +27,14 @@ export const Main = () => {
         setEditData(data);
         setOpen(true);
     };
+
+    if (data.isLoading) {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Spinner />
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -37,7 +54,7 @@ export const Main = () => {
                     existingData={editData}
                 />
             </BasicModal>
-            <DataTables handleEdit={handleEdit} />
+            <DataTables handleEdit={handleEdit} data={data.data} />
         </div>
     );
 };

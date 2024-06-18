@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,9 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { deleteElement, getAllDataTable } from '../../redux/actions/dataAction';
-import { useDispatch, useSelector } from 'react-redux';
-import { Spinner } from '../Spinner/Spinner';
+import { useDispatch } from 'react-redux';
+import { deleteElement } from '../../redux/actions/dataAction';
 import { TableRowData } from '../TableRow/TableRowData';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -22,20 +21,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-export function DataTables({ handleEdit }) {
+export function DataTables({ handleEdit, data }) {
     const dispatch = useDispatch();
 
-    React.useLayoutEffect(() => {
-        dispatch(getAllDataTable());
-    }, [dispatch]);
-
-    const data = useSelector((store) => store.data);
-
-    function handleDelete(id) {
+    const handleDelete = (id) => {
         dispatch(deleteElement(id));
-    }
+    };
 
-    // console.log('dataTable', data);
     return (
         <TableContainer
             component={Paper}
@@ -71,16 +63,16 @@ export function DataTables({ handleEdit }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.isLoading ? (
+                    {data.length === 0 ? (
                         <TableRow>
-                            <StyledTableCell colSpan={8} align="center">
-                                <Spinner />
+                            <StyledTableCell colSpan={10} align="center">
+                                No data available
                             </StyledTableCell>
                         </TableRow>
                     ) : (
                         <TableRowData
                             StyledTableCell={StyledTableCell}
-                            dataTable={data.data}
+                            dataTable={data}
                             handleDelete={handleDelete}
                             handleEdit={handleEdit}
                         />
