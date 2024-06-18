@@ -58,7 +58,7 @@ export const deleteElement = (id) => (dispatch) => {
 };
 
 export const addDataElement = (data) => (dispatch) => {
-    console.log('data redux add: ', data);
+    // console.log('data redux add: ', data);
     dispatch(setIsLoadingData(true));
     axios
         .post(`/ru/data/v3/testmethods/docs/userdocs/create`, data, {

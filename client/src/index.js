@@ -6,7 +6,7 @@ import { store } from './redux/store';
 import './index.css';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://test.v5.pryaniky.com';
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
