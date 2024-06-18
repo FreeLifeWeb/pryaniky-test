@@ -63,20 +63,12 @@ export function DataTables({ handleEdit, data }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.length === 0 ? (
-                        <TableRow>
-                            <StyledTableCell colSpan={10} align="center">
-                                No data available
-                            </StyledTableCell>
-                        </TableRow>
-                    ) : (
-                        <TableRowData
-                            StyledTableCell={StyledTableCell}
-                            dataTable={data}
-                            handleDelete={handleDelete}
-                            handleEdit={handleEdit}
-                        />
-                    )}
+                    <TableRowData
+                        StyledTableCell={StyledTableCell}
+                        dataTable={data}
+                        handleDelete={handleDelete}
+                        handleEdit={handleEdit}
+                    />
                 </TableBody>
             </Table>
         </TableContainer>
