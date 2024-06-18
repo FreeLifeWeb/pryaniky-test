@@ -24,11 +24,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export function DataTables({ handleEdit }) {
     const dispatch = useDispatch();
-    const data = useSelector((store) => store.data);
 
     React.useEffect(() => {
         dispatch(getAllDataTable());
     }, [dispatch]);
+
+    const data = useSelector((store) => store.data);
 
     function handleDelete(id) {
         dispatch(deleteElement(id));
