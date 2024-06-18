@@ -12,7 +12,7 @@ export const Main = () => {
     const [open, setOpen] = useState(false);
     const [editData, setEditData] = useState(null);
     const dispatch = useDispatch();
-    const data = useSelector((store) => store.data);
+    const { data, isLoading } = useSelector((store) => store.data);
 
     useEffect(() => {
         dispatch(getAllDataTable());
@@ -27,14 +27,6 @@ export const Main = () => {
         setEditData(data);
         setOpen(true);
     };
-
-    if (data.isLoading) {
-        return (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Spinner />
-            </div>
-        );
-    }
 
     return (
         <div>
@@ -54,7 +46,11 @@ export const Main = () => {
                     existingData={editData}
                 />
             </BasicModal>
-            <DataTables handleEdit={handleEdit} data={data.data} />
+            {isLoading ? (
+                <Spinner />
+            ) : (
+                <DataTables handleEdit={handleEdit} data={data} />
+            )}
         </div>
     );
 };
