@@ -9,10 +9,10 @@ import { getAllDataTable } from '../../redux/actions/dataAction';
 import { Spinner } from '../../components/Spinner/Spinner';
 
 export const Main = () => {
+    const { data, isLoading } = useSelector((store) => store.data);
     const [open, setOpen] = useState(false);
     const [editData, setEditData] = useState(null);
     const dispatch = useDispatch();
-    const { data, isLoading } = useSelector((store) => store.data);
 
     useEffect(() => {
         dispatch(getAllDataTable());
@@ -27,7 +27,9 @@ export const Main = () => {
         setEditData(data);
         setOpen(true);
     };
-
+    if (isLoading) {
+        return <Spinner />;
+    }
     return (
         <div>
             <div className={style.addButtonContainer}>
@@ -46,11 +48,7 @@ export const Main = () => {
                     existingData={editData}
                 />
             </BasicModal>
-            {isLoading ? (
-                <Spinner />
-            ) : (
-                <DataTables handleEdit={handleEdit} data={data} />
-            )}
+            {data && <DataTables handleEdit={handleEdit} data={data} />}
         </div>
     );
 };

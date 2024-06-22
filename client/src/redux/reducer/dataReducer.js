@@ -9,7 +9,7 @@ import {
 
 const initialState = {
     data: [],
-    isLoading: false,
+    isLoading: true,
     error: null,
 };
 export default function dataReducer(state = initialState, action) {
@@ -17,7 +17,7 @@ export default function dataReducer(state = initialState, action) {
 
     switch (type) {
         case GET_DATA:
-            return { ...state, data: payload };
+            return { ...state, data: payload.data };
         case DELETE_DATA:
             return {
                 ...state,

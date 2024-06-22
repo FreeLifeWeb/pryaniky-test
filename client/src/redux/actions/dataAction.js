@@ -18,9 +18,9 @@ export const setIsLoadingData = (payload) => ({
     type: SET_IS_LOADING,
     payload,
 });
-const token = getToken();
 
 export const getAllDataTable = () => (dispatch) => {
+    const token = getToken();
     // console.log('getAllDataTable');
     dispatch(setIsLoadingData(true));
     axios
@@ -30,8 +30,8 @@ export const getAllDataTable = () => (dispatch) => {
             },
         })
         .then((res) => {
-            dispatch(getData(res.data.data));
-            // console.log('redux', res.data.data);
+            dispatch(getData(res.data));
+            // console.log('redux', res.data);
         })
         .catch((err) => {
             dispatch(setErrorData('error when requesting data!'));
@@ -42,6 +42,7 @@ export const getAllDataTable = () => (dispatch) => {
 };
 
 export const deleteElement = (id) => (dispatch) => {
+    const token = getToken();
     dispatch(setIsLoadingData(true));
     axios
         .post(
@@ -59,6 +60,7 @@ export const deleteElement = (id) => (dispatch) => {
 };
 
 export const addDataElement = (data) => (dispatch) => {
+    const token = getToken();
     // console.log('data redux add: ', data);
     dispatch(setIsLoadingData(true));
     axios
@@ -73,6 +75,7 @@ export const addDataElement = (data) => (dispatch) => {
 };
 
 export const putData = (data, id) => (dispatch) => {
+    const token = getToken();
     dispatch(setIsLoadingData(true));
     axios
         .post(`/ru/data/v3/testmethods/docs/userdocs/set/${id}`, data, {
