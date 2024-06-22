@@ -28,7 +28,11 @@ export const Main = () => {
         setOpen(true);
     };
     if (isLoading) {
-        return <Spinner />;
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Spinner />
+            </div>
+        );
     }
     return (
         <div>
